@@ -4,7 +4,7 @@
 
 ## Overview
 
-DADI API is built on Node.JS and MongoDB. It is a high performance RESTful API layer designed in support of [API-first development and the principle of COPE](https://github.com/dadi/api/blob/master/docs/apiFirst.md).
+DADI API is built on Node.JS and MongoDB. It is a high performance RESTful API layer designed in support of [API-first development and the principle of COPE](https://github.com/dadi/api/blob/docs/docs/apiFirst.md).
 
 You can consider it as the data layer within a platform (including the data model). It is designed to be plugged into a templating layer, a mobile application or to be used with any other data consumer.
 
@@ -28,23 +28,23 @@ It is part of DADI, a suite of components covering the full development stack, b
 * The API
 	* [Rest API specification](https://github.com/dadi/api/blob/docs/docs/restApiSpecification.md)
 	* [Authorisation](https://github.com/dadi/api/blob/docs/docs/authorisation.md)
-	* [Working with endpoints](https://github.com/dadi/api/blob/master/docs/workingWithEndpoints.md)
-	* [Collections](https://github.com/dadi/api/blob/master/docs/collections.md)
+	* [Working with endpoints](https://github.com/dadi/api/blob/docs/docs/workingWithEndpoints.md)
+	* [Collections](https://github.com/dadi/api/blob/docs/docs/collections.md)
 	* [Custom endpoints](https://github.com/dadi/api/blob/docs/docs/customEndpoints.md)
-	* [Config API](https://github.com/dadi/api/blob/master/docs/configApi.md)
-	* [Validation](https://github.com/dadi/api/blob/master/docs/validation.md)
+	* [Config API](https://github.com/dadi/api/blob/docs/docs/configApi.md)
+	* [Validation](https://github.com/dadi/api/blob/docs/docs/validation.md)
 * Middleware
-	* [API module](https://github.com/dadi/api/blob/master/docs/apiModule.md)
-	* [Authorisation middleware](https://github.com/dadi/api/blob/master/docs/authMiddleware.md)
-	* [Connection module](https://github.com/dadi/api/blob/master/docs/connectionModule.md)
-	* [Extension API](https://github.com/dadi/api/blob/master/docs/extensionApi.md)
-	* [Model module](https://github.com/dadi/api/blob/master/docs/modelModule.md)
-	* [Logging](https://github.com/dadi/api/blob/master/docs/logging.md)
-	* [Monitor module](https://github.com/dadi/api/blob/master/docs/monitorModule.md)
+	* [API module](https://github.com/dadi/api/blob/docs/docs/apiModule.md)
+	* [Authorisation middleware](https://github.com/dadi/api/blob/docs/docs/authMiddleware.md)
+	* [Connection module](https://github.com/dadi/api/blob/docs/docs/connectionModule.md)
+	* [Extension API](https://github.com/dadi/api/blob/docs/docs/extensionApi.md)
+	* [Model module](https://github.com/dadi/api/blob/docs/docs/modelModule.md)
+	* [Logging](https://github.com/dadi/api/blob/docs/docs/logging.md)
+	* [Monitor module](https://github.com/dadi/api/blob/docs/docs/monitorModule.md)
 * [Development](https://github.com/dadi/api/blob/docs/docs/development.md)
 * [License](https://github.com/dadi/api/blob/docs/docs/license.md)
 * [GPL](https://github.com/dadi/api/blob/docs/docs/gpl.md)
 
 Update/consolodate with config and then remove:
 
-* [Caching](https://github.com/dadi/api/blob/master/docs/cache.md)
+* [Caching](https://github.com/dadi/api/blob/docs/docs/cache.md)
