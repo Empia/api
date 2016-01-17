@@ -1,12 +1,12 @@
-![Serama](../serama.png)
+# DADI API
 
-# Config API
+## Config API
 
-## Overview
+### Overview
 
 DADI API exposes its own API to allow for the creation new collection endpoints as well as custom endpoints. This allows authorised users to, for example, create a new collection endpoint by sending a POST request to `/version/database/collection/config`.
 
-## Collections
+### Collections
 
 To create a new collection endpoint, simply send a POST request containing the new collection's schema.
 
@@ -24,7 +24,7 @@ You may remove a collection endpoint by sending a DELETE request to the url desc
 
 You may also get a copy of the schema by sending a GET request.
 
-## Endpoints
+### Endpoints
 
 To create a new custom endpoint, send a POST request to `/:version/:endpointName/config`.
 
@@ -32,7 +32,7 @@ This request should contain content-type `text/plain`, and must contain valid Ja
 
 _WARNING: the content of this request will be evaluated on the server: if a malicious user obtains a valid token they will be able to execute arbitrary Javascript. Take care to fully secure your API in production environments_
 
-## Main Config
+### Main Config
 
 To update the main config file, send a POST request to `/serama/config`.
 

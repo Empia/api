@@ -1,8 +1,8 @@
-![Serama](../serama.png)
+# DADI API
 
-# Validation
+## Validation
 
-## Overview
+### Overview
 
 Field validation can be defined in a schema collection file.
 
@@ -11,7 +11,7 @@ Field validation can be defined in a schema collection file.
 * A field can be validated on length. Validation will fail if the length of the string is greater or less than the specified length limit
 * A field can be validated on a regular expression pattern.
 
-## Example Usage
+### Example Usage
 
 ```js
 {
