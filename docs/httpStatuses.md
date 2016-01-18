@@ -12,7 +12,7 @@ Status Code       | Description        |
 :----------------|:------------
 200 OK | Returned for all successful requests. A query that returns no data will still return `200 OK`. |  
 201 Created |  | 
-204 No Content | Returned following a successful DELETE request, provided the `feedback` configuration setting is `true`. | 
+204 No Content | Returned following a successful DELETE request, provided the `feedback` configuration setting is `false`. | 
 
 
 #### Error Codes
