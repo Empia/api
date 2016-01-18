@@ -41,10 +41,7 @@ It is part of DADI, a suite of components covering the full development stack, b
 	* [Model module](https://github.com/dadi/api/blob/docs/docs/modelModule.md)
 	* [Logging](https://github.com/dadi/api/blob/docs/docs/logging.md)
 	* [Monitor module](https://github.com/dadi/api/blob/docs/docs/monitorModule.md)
+* [Cache performance](https://github.com/dadi/api/blob/docs/docs/cachePerformance.md)
 * [Development](https://github.com/dadi/api/blob/docs/docs/development.md)
 * [License](https://github.com/dadi/api/blob/docs/docs/license.md)
 * [GPL](https://github.com/dadi/api/blob/docs/docs/gpl.md)
-
-Update/consolodate with config and then remove:
-
-* [Caching](https://github.com/dadi/api/blob/docs/docs/cache.md)
