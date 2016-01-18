@@ -1,18 +1,23 @@
 # DADI API
 
-## Cache
+## Cache performance
 
 ### Overview
 
-This is a file based cache that may be configured in config.json.
+DADI API has caching xupport built in for both a file-based cache and Redis. Caching can be configured globally and at individual collection level.
 
-Due to the thin nature of the server, and we assume mongo's mem caching, the cache doesn't have a major impact on performance in a dev environment. If network traffic were required to hit the db this should change significantly.
+Due to the thin nature of the server, and because we assume the use of Mongo's mem caching, the cache doesn't have a major impact on performance in a dev environment. If significant network traffic were required to hit the db this should change significantly.
 
 Benchmarks undertaken with ApacheBenchmark (ab) can be seen below.
 
-### Config
+### File based cache
 
-inside config.json *ex:*
+#### Config
+
+Inside config.{ENVIRONMENT}.json
+
+
+
     "caching": {
         "enabled": false,
         "ttl": 300,
@@ -25,13 +30,13 @@ inside config.json *ex:*
 * `directory` path to the directory where files should be stored. **Important:** this dir must already exist! (required if cache is enabled)
 * `extension` the file extension to use when naming the cache files. This has no bearing on the `content-type` of the response, so feel free to put anything here (required if cache is enabled)
 
-### Notes
+#### Notes
 
-The naming convention for files is done by creating a hex string from a sha1 hash of node's `req.url` value, then appending the extension per config. This keeps cache values unique and avoids naming conflicts.
+The naming convention for files is based on a hex string from a sha1 hash of node's `req.url` value, with the extension per config appended. This keeps cache values unique and avoids naming conflicts.
 
-### Benchmarks
+#### Benchmarks
 
-#### Benchmarks With disk Cache
+##### Benchmarks With disk Cache
 
     Server Hostname:        localhost
     Server Port:            3000
@@ -69,7 +74,7 @@ The naming convention for files is done by creating a hex string from a sha1 has
       99%     14
      100%     17 (longest request)
 
-#### Benchmarks Without disk Cache
+##### Benchmarks Without disk Cache
 
     Server Hostname:        localhost
     Server Port:            3000
@@ -106,3 +111,7 @@ The naming convention for files is done by creating a hex string from a sha1 has
       98%     13
       99%     17
      100%     23 (longest request)
+
+### Redis
+
+**_To be added_**
