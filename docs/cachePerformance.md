@@ -16,8 +16,6 @@ Benchmarks undertaken with ApacheBenchmark (ab) can be seen below.
 
 Inside config.{ENVIRONMENT}.json
 
-
-
     "caching": {
         "enabled": false,
         "ttl": 300,
@@ -114,4 +112,4 @@ The naming convention for files is based on a hex string from a sha1 hash of nod
 
 ### Redis
 
-**_To be added_**
+**_To be added icne Redis support is available_**
