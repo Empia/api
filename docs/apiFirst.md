@@ -4,11 +4,11 @@
 
 ### Overview
 
-Traditional product design is channel and device centric. But users inhabit in a multi-channel, multi-device world.
+Traditional product design is channel and device centric. But users inhabit a multi-channel, multi-device world.
 
-Channel and/or device centric product design results in duplicated effort and wasted engineering work. API-first development is focused on removing this technical debt through the separation of the data backend and the data consuming front end.
+Channel and/or device centric product design results in duplicated effort and wasted engineering work. API-first development is focused on removing this technical debt through the separation of the data backend and the data-consuming frontend.
 
-COPE stands for Create Once, Publish Everywhere. It is about reducing editorial overhead by freeing content for use in multiple different contexts. Simply put, COPE separates data from design, making your content reusable and future-proof for new devices or platforms.
+__COPE__ stands for _Create Once, Publish Everywhere_. It is about reducing editorial overhead by freeing content for use in multiple different contexts. Simply put, COPE separates data from design, making your content reusable and future-proof for new devices or platforms.
 
 Taking an API-first development approach enables COPE and brings several additional benefits -
 
@@ -20,11 +20,11 @@ Taking an API-first development approach enables COPE and brings several additio
 
 #### 1. Separation of Concerns
 
-Completely separating your frontend and backend codebases allows for easier management. It reduces future technical debt by not interlacing backend templated code into front end client views.
+Completely separating your frontend and backend codebases allows for easier management. It reduces future technical debt by not interlacing backend templated code into frontend client views.
 
 #### 2. Scalability
 
-Completely separating your front end and back end codebases helps to simplify future scalability by enabling you to scale platform components independently of each other. It allows for the client and server to sit behind their own load balancers and in their own infrastructure, giving you the ability to scale on a micro-level which brings flexibility (for example your data could be stored centrally while your client is hosted in multiple geographical locations) and cost savings.
+Completely separating your frontend and backend codebases helps to simplify future scalability by enabling you to scale platform components independently of each other. It allows for the client and server to sit behind their own load balancers and in their own infrastructure, giving you the ability to scale on a micro-level which brings flexibility (for example your data could be stored centrally while your client is hosted in multiple geographical locations) and cost savings.
 
 #### 3. Reduction of Language Barriers
 
