@@ -4,16 +4,15 @@
 
 ### Overview
 
-[TODO] DADI API starts with a default configuration.
+Configuration files control the behaviour of your API. While DADI API starts with default values for many configuration settings, it is essential that you understand how each setting affects your application.
+
+To most important configuration blocks for starting your API are [server](#server), [database](#database) and [authentication](#auth).
 
 #### Configuration Files
 
 Configuration settings are defined in JSON files within a `/config` directory at the root of your application. DADI API has provision for multiple configuration files, one for each environment that your API is expected to run under: `development`, `qa` and `production`.
 
-The naming convention for configuration files follows the format
-
-```config.<environment>.json
-```
+The naming convention for configuration files follows the format `config.<environment>.json`
 
 For example:
 
@@ -338,18 +337,23 @@ Given a successful DELETE request, the `feedback` setting determines the respons
 }
 ```
 
-#### documentation
+#### apidoc
+
+This configuration section controls the behaviour of the DADI API Documentation module, if installed.
+
+Install the package:
 
 ```
-"documentation": {
+npm install dadi-apidoc --save
+```
+
+Add a configuration section to your configuration file(s):
+
+```
+"apidoc": {
   "title": "API Documentation",
-  "description": "This is the Content API for a RESTful, composable interface in JSON built on DADI API.",
+  "description": "This is the Content API for a RESTful API in JSON built on DADI API.",
   "markdown": false,
-  "themeVariables": "default",
-  "themeTemplate": "default",
-  "themeStyle": "default",
-  "themeCondenseNav":	true,
-  "themeFullWidth": false,
   "path": "/docs",
   "generateCodeSnippets": true
 }
@@ -360,10 +364,10 @@ Given a successful DELETE request, the `feedback` setting determines the respons
 Property       | Description        |  Type        | Default         |  Example
 :----------------|:------------|:------------------|:----------------|:---------
 title | The title to display for the API documentation | String | "API Documentation" | 
-description  | A markdown formatted description of the API documentation | String | "This is the Content API for a RESTful, composable interface in JSON built on DADI API." | 
+description  | A markdown formatted description of the API documentation | String | "This is the Content API for a RESTful API in JSON built on DADI API." | 
 markdown | If true, documentation is rendered as raw Markdown | Boolean | false | true
-path | | String | "/docs" | 
-generateCodeSnippets | | Boolean | true | 
+path | The location in which to save an API blueprint file in Markdown format | String | "/docs" | 
+generateCodeSnippets | If true, code examples are generated from the documentation | Boolean | false | true | 
 themeVariables | | String | "default" | 
 themeTemplate | | String | "default" | 
 themeStyle | | String | "default" | 
