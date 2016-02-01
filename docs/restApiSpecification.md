@@ -1,110 +1,78 @@
 # DADI API
 
-## Rest API specification
+## REST API Specification
 
 DADI API accepts GET, POST, PUT, PATCH and DELETE requests.
 
-### Examples
+### GET
 
-#### 1.
+#### GET Resource Collection
 
-**GET** *http(s)://{url}/{version number}/{database name}/{collection name}*
+**URL Format:** `http(s)://{url}/{version}/{database}/{collection}`
 
-Returns a JSON object with all results from the *{collection name}* collection and *{database name}* database. The result set will be paginated and limited to a number of records as defined as the default view in the collection schema file in *./workspace/collections/{version number}/{database name}/collection.{collection name}.json*.
+**Example:** `http://api.example.com/1.0/library/books`
+
+Returns a JSON object with all results from the `{database}` database and `{collection}` collection. The result set will be paginated and limited to a number of records as defined as the default view in the collection schema file in *./workspace/collections/{version number}/{database name}/collection.{collection name}.json*.
 
 Default views can be overridden using parameters at the point of API request.
 
 You can read more about this and about the collection schema [here](https://github.com/dadi/api/blob/master/docs/endpoints.md).
 
-#### 2.
+#### GET Single Resource
 
-**GET** *http(s)://{url}/{version number}/{database name}/{collection name}/{:id}*
+**URL Format:** `http(s)://{url}/{version}/{database}/{collection}/{:id}`
 
-Returns the record with the id of *{:id}* in the *{collection name}* collection and *{database name}* database.
+**Example:** `http://api.example.com/1.0/library/books/560a44b33a4d7de29f168ce4`
 
-#### 3.
+Returns the record with the id of `{:id}` in the `{database}` database and `{collection}` collection.
 
-**GET** *http://{url}/{version number}/{endpoint name}*
+### POST
 
-Returns a JSON object. Parameters and return are completely customisable. The output is generated using the file:
+#### Create New Resource
 
-*workspace/endpoints/{version number}/endpoint.{endpoint name}.js*
+**URL Format:** `http(s)://{url}/{version}/{database}/{collection}`
 
-See `test/acceptance/workspace/endpoints/v1/endpoint.test-endpoint.js` for a "Hello World" example.
+**Example:** `http://api.example.com/1.0/library/books`
 
-#### 4.
-
-**GET** *http://{url}/{version number}/{database name}/{collection name}/config*
-
-Returns a JSON object of the schema file:
-
-*./workspace/collections/v{version number}/{database name}/collection.{collection name}.json*
-
-#### 5.
-
-**POST** *http://{url}/{version number}/{database name}/{collection name}/config*
-
-Updates the specified collection config file, or creates it if it doesn't exist. This operation requires client credentials with `accessType: "admin"`.
-
-```
-{
-  clientId: 'clientX-admin',
-  secret: 'secret',
-  accessType: 'admin'
-}
-```
-
-See [Authorisation](https://github.com/dadi/api/blob/master/docs/auth.md) for more information regarding the client credentials record, and [Endpoints](https://github.com/dadi/api/blob/master/docs/endpoints.md) for more information regarding endpoint configuration requests.
-
-#### 6.
-
-**GET** *http://{url}/api/config*
-
-Returns a JSON object of the main config file:
-
-*./config.json*
-
-You can read more about this [here](https://github.com/dadi/api/blob/master/docs/configApi.md).
-
-#### 7.
-
-**POST** *http://{url}/api/config*
-
-Updates the main config file:
-
-*./config.json*
-
-You can read more about this [here](https://github.com/dadi/api/blob/master/docs/configApi.md).
-
-#### 8.
-
-**POST** *http://{url}/{version number}/{database name}/{collection name}*
-
-Adds a new record to the collection specified by *{collection name}* in the *{database name}* database.
+Adds a new record to the `{collection}` collection in the `{database}` database.
 
 If the record passes validation it is inserted into the collection.
 
-The following additional fields are saved alongside with every record:
+The following additional fields are added to every record:
 
-* *created_at*: timestamp of creation
-* *created_by*: user id of creator
-* *api_version*: api version number passed in the url ({version number}). i.e. v1
+* `created_at`: timestamp of creation
+* `created_by`: user id of creator
+* `api_version`: API version number passed in the URL as `{version}`, e.g. `1.0`
 
-#### 9.
+#### Update Existing Resource
 
-**POST** *http://{url}/{version number}/{database name}/{collection name}/{:id}*
+**URL Format:** `http(s)://{url}/{version}/{database}/{collection}/{:id}`
 
-Updates an existing record with the id of *{:id}* in the *{collection name}* collection and *{database name}* database.
+**Example:** `http://api.example.com/1.0/library/books/560a44b33a4d7de29f168ce4`
+
+Updates an existing record with the id of `{:id}` in the `{database}` database abd `{collection}` collection.
 
 If the record passes validation it will be updated.
 
-The following additional fields are added/updated alongside every passed field:
+The following additional fields are added or updated:
 
-* *last_modified_at*: timestamp of modification
-* *last_modified_by*: user id of updater
+* `last_modified_at`: timestamp of modification
+* `last_modified_by`: user id of updater
 
-#### 10.
+### DELETE
 
-**DELETE** *http://{url}/{version number}/{database name}/{collection name}/{:id}*
+#### Delete Existing Resource
 
-Deletes the record with the id of *{:id}* in the *{collection name}* collection and *{database name}* database.
+**URL Format:** `http(s)://{url}/{version}/{database}/{collection}/{:id}`
+
+**Example:** `http://api.example.com/1.0/library/books/560a44b33a4d7de29f168ce4`
+
+Deletes the record with the id of `{:id}` from the `{collection}` collection in `{database}` database.
+
+## Custom Endpoints
+
+**URL Format:** `http(s)://{url}/{version}/{endpoint}`
+
+**Example:** `http://api.example.com/1.0/new-books`
+
+Returns a JSON object. Parameters and return are completely customisable. The output is generated using the file:
