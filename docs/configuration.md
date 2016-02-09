@@ -37,8 +37,8 @@ my-api/
   package.json
 
   workspace/
-    collections      # collection schema files
-    endpoints        # custom Javascript endpoints
+    collections/     # collection schema files
+    endpoints/       # custom Javascript endpoints
 
 ```
 
@@ -158,7 +158,7 @@ The Node.JS MongoDB driver handles communication with the database servers to de
 
 #### Collection-specific Databases
 
-The `enableCollectionDatabases` setting determines whether the API will separate collection data into separate databases as defined by the collection URLs.
+The `enableCollectionDatabases` setting determines whether the API will store collection data in separate databases as defined by the collection URLs.
 
 ```
 /1.0/library/books
