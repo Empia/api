@@ -37,8 +37,8 @@ Install GCC to provide the latest build of the c++ bson extension (not required,
 Install Git and pull down the latest stable build of DADI API:
 
 1. `sudo apt-get install git`
-2. `sudo git clone https://github.com/bantam-framework/serama.git`
-3. `cd serama/`
+2. `sudo git clone https://github.com/dadi/api.git`
+3. `cd api/`
 
 Install DADI API:
 
@@ -77,13 +77,13 @@ To run the API server in the background, install [Forever](https://github.com/no
 
 Install as a service and ensure it loads on boot:
 
-`[sudo] forever-service install -s main.js -e NODE_ENV=production serama --start`
+`[sudo] forever-service install -s main.js -e NODE_ENV=production api --start`
 
 _Note the environment variable - `NODE_ENV=production` - must be set to target the required config version._
 
 You can then interact with the service using the following command:
 
-- Start: `[sudo] start serama`
-- Stop: `[sudo] stop serama`
-- Status: `[sudo] status serama`
-- Restart `[sudo] restart serama`
+- Start: `[sudo] start api`
+- Stop: `[sudo] stop api`
+- Status: `[sudo] status api`
+- Restart `[sudo] restart api`
