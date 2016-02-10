@@ -4,7 +4,7 @@
 
 ### Overview
 
-collection specification file / collection endpoint / database collection
+> Work in progress, please feel free to make suggestions. [MORE]
 
  * [Collection specification](#collection-specification)
  * [Field specification](#field-specification)
@@ -45,7 +45,7 @@ Specific versions of your API are represented by "version" folders within the co
 
 Collection documents may be stored in separate databases, represented by the name of the folder within the "version" folder.
 
-**Note** This feature is disabled by default. To enable separate databases in your API the configuration setting `database.enableCollectionDatabases` must be `true`. See [Collection-specific Databases](https://github.com/dadi/api/blob/docs/docs/configuration.md#collection-specific-databases) for more information.
+> **Note** This feature is disabled by default. To enable separate databases in your API the configuration setting `database.enableCollectionDatabases` must be `true`. See [Collection-specific Databases](https://github.com/dadi/api/blob/docs/docs/configuration.md#collection-specific-databases) for more information.
 
 
 ##### Collection
@@ -383,7 +383,7 @@ update operation to change the value of `title`:
 }
 ```
 
-_**Note:** the API does not add or update any date/time fields to indicate the order in which revision documents were created, nor does it perform any sort operations when returning a document's revision history. It is up to the API consumer to include appropriate date/time fields and perform sort operations on the returned revision collection_
+> _**Note:** the API does not add or update any date/time fields to indicate the order in which revision documents were created, nor does it perform any sort operations when returning a document's revision history. It is up to the API consumer to include appropriate date/time fields and perform sort operations on the returned revision collection_
 
 
 #### Document "Composition" via Reference Fields
