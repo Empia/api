@@ -4,7 +4,7 @@
 
 `$ [sudo] git clone https://github.com/dadi/api.git`
 
-`$ cd serama`
+`$ cd api`
 
 ### Installing dependencies
 
@@ -55,15 +55,15 @@ Pro tip: to run the server in the background, install [Forever](https://github.c
 
 Install the API as a service and ensure it loads on boot:
 
-`[sudo] forever-service install -s main.js serama --start`
+`[sudo] forever-service install -s main.js api --start`
 
 You can then interact with Serama as a service using the following command:
 
-- Start: `[sudo] start serama`
-- Stop: `[sudo] stop serama`
-- Status: `[sudo] status serama`
-- Restart `[sudo] restart serama`
+- Start: `[sudo] start api`
+- Stop: `[sudo] stop api`
+- Status: `[sudo] status api`
+- Restart `[sudo] restart api`
 
 ### Additional reading
 
-You can see a complete installation guide for Serama under Ubuntu [here](https://github.com/dadi/api/blob/master/docs/install.ubuntu.md).
+You can see a complete installation guide for API under Ubuntu [here](https://github.com/dadi/api/blob/master/docs/install.ubuntu.md).
