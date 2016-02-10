@@ -34,9 +34,3 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 * PATCH version when you make backwards-compatible bug fixes.
 
 _Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format._
-
-### Contributing
-
-Very daring.
-
-Fork, hack, possibly even add some tests, then send a pull request :)
