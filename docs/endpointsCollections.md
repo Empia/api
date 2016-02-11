@@ -182,9 +182,9 @@ Default values for the collection endpoint are set the following way:
   "callback": null,
   "defaultFilters": null,
   "fieldLimiters": null,
-  *storeRevisions", false,
-  *revisionCollection": null,
-  *index"
+  "storeRevisions", false,
+  "revisionCollection": null,
+  "index"
 }
 ```
 
