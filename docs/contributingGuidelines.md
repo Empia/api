@@ -108,3 +108,18 @@ When we decide to release new version `vN.0.0`, the following steps are followed
     $ git checkout master
     $ git merge vN.0.0
     ```
+
+
+### Commits
+
+#### One change per commit
+
+A commit should contain exactly one logical change. A logical change includes adding a new feature, fixing a specific bug, etc. If it's not possible to describe the high level change in a few words, it is most likely too complex for a single commit. The diff itself should be as concise as reasonably possibly and it's almost always better to err on the side of too many patches than too few. As a rule of thumb, given only the commit message, another developer should be able to implement the same patch in a reasonable amount of time.
+
+Please don't include more than one change in each patch. If your commit message requires an "and" in the middle, it's likely you need separate commits.
+
+#### Commit messages
+
+Please use a short one-line summary of the change. After the one-line summary, an empty line, then multiple paragraphs explaining the patch in detail (if required). Don't describe the code, describe the intent and the approach.
+
+Please don't add lazy commit messages such as "misc fixes and cleanups".
