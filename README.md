@@ -33,6 +33,7 @@ It is part of DADI, a suite of components covering the full development stack, b
 	  * [Custom Endpoints](https://github.com/dadi/api/blob/docs/docs/endpointsCustom.md)
 	  * [Querying](https://github.com/dadi/api/blob/docs/docs/querying.md)
 	  * [Configuration API](https://github.com/dadi/api/blob/docs/docs/configApi.md)
+	  * [Status Endpoint](https://github.com/dadi/api/blob/docs/docs/status.md)
 	* [Validation](https://github.com/dadi/api/blob/docs/docs/validation.md)
 	* [HTTP Status Codes](https://github.com/dadi/api/blob/docs/docs/httpStatuses.md)
 * Middleware
