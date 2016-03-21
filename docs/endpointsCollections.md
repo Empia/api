@@ -4,8 +4,6 @@
 
 ### Overview
 
-> Work in progress, please feel free to make suggestions. [MORE]
-
  * [Collection specification](#collection-specification)
  * [Field specification](#field-specification)
  * [Field types](#field-types)
@@ -252,58 +250,7 @@ fieldLimiters: {"name":0, "email": 0}
 
 #### Validation
 
-Documents sent to the API with POST and PUT requests are validated at field level based on the rules defined in the collection schema.
-
-If a document fails validation an errors collection will be returned with the reasons for validation failure:
-
-```
-{
-  "success": false,
-  "errors": [
-    {
-      "field": "title",
-      "message": "must contain uppercase letters only"
-    },
-    {
-      "field": "description",
-      "message": "can't be blank"
-    },
-    {
-      "field": "start_date",
-      "message": "is invalid"
-    },
-    {
-      "field": "extra_field",
-      "message": "doesn't exist in the collection schema"
-    }
-  ]
-}
-```
-##### Regarding error messages
-
-A set of default error messages are returned for fields that fail validation. The table below lists the built-in error messages and their associated meaning.
-
-Message       | Description         
-:----------------|:-------------------
-"is invalid" | The default message returned for a field that fails validation
-"must be specified" | A `required` field has not been supplied
-"can't be blank" | A `required` field has been supplied but with no value
-"should match the pattern `^[A-Z]*$`" | The value does not match the configured regular expression
-
-It is possible to supply a custom error message by specifying a `message` property in a field specification.
-
-For example:
-
-```
-"title": {
-  "type": "String",
-  "label": "Title",
-  "comments": "The title of the book",
-  "example": "The Autobiography of Benjamin Franklin",
-  "required": true,
-  "message": "must contain a value"
-}
-```
+Documents sent to the API with POST and PUT requests are validated at field level based on the rules defined in the collection schema. Find more information in the [Validation](https://github.com/dadi/api/blob/docs/docs/validation.md) section.
 
 #### Database Indexes
 
