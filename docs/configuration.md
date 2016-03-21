@@ -71,7 +71,7 @@ An example file containing all of the available configuration options can be fou
 
 #### app
 
-Specifies application-specific settings, such as `name`.
+Application-specific settings, such as `name`.
 
 ```
 "app": {
@@ -81,12 +81,14 @@ Specifies application-specific settings, such as `name`.
 
 #### server
 
-The `server.host` config is passed to node's `server.listen` function
-http://nodejs.org/api/http.html#http_server_listen_port_hostname_backlog_callback
+Specifies `host` and `port` to begin accepting connections on. If the `host` is omitted or `null`,
+the server will accept connections on any IPv6 address (::) when IPv6 is available,
+or any IPv4 address (0.0.0.0) otherwise.
 
-You should be able to set it to your IP as well, but depending on your hosting, that may be tricky. For example, on AWS you would have to use your private IP instead of your public IP (or use `0.0.0.0`).
+A `port` value of zero will assign a random port.
 
-The proper name should always resolve correctly. Alternately, you can set it to null, to accept connections on any IPv4 address.
+**NB:** You should be able to set `host` to your IP address as well, but depending on your hosting that may be tricky.
+On AWS you would need to use your private IP instead of your public IP, or alternatively use `0.0.0.0` which has already been proven to work without fail.
 
 ```
 "server": {
