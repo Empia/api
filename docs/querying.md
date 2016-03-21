@@ -13,7 +13,7 @@ When querying a collection it is possible to override the default settings speci
 count            | integer     | Maximum number of results to be returned   | 50                   | 10
 page             | integer     | Page number                                   | 1                    | 2
 skip             | integer     | The number of records to skip              | 0   | 3
-sort             | string      | Field to sort on                          | _id                  | "title"
+sort             | string      | Field to sort on                          | `_id`                  | "title"
 sortOrder       | string      | Sort direction                                | asc                  | desc
 filter           | object        | MongoDB query object or Aggregation Pipeline array                            |                      | { fieldName: {"$in": ["a", "b"]}object}
 fields           | object        | Specify the fields to return in the resultset.  |          | Include fields: {"field1":1,"field2":1} Exclude fields: {field2":0}
@@ -170,3 +170,12 @@ client.get('/versionName/databaseName/cars?filter=' + query);
 Overrides the collection's `callback` setting.
 
 callback must be made up of letters only.
+
+
+### Regex
+
+Original | Converted
+---------|----------
+{ name: 'ford' } | { name: /^ford$/i }
+{ name: { '$regex': 'ford' } } | { name: { '$regex': /ford/i } }
+[ { '$group': { _id: '$name' } } ] | [ { '$group': { _id: '$name' } } ]
