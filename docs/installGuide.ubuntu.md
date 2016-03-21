@@ -42,10 +42,17 @@ Install Git and pull down the latest stable build of DADI API:
 
 Install DADI API:
 
-*Note:* The application log and cache directories are created at startup using settings in the main configuration file `config.json`.
-
-`[sudo] cp config-sample.json config.json`
 `[sudo] npm install`
+
+Configure the API:
+
+Application settings are held in a JSON file in the `config` directory. On startup, the application will
+look for a configuration file matching the current environment. FOr example, if the application is started
+in development mode (the default) it will attempt to load file `config/config.development.json`.
+
+*Note:* The application log and cache directories are created at startup using settings found in the configuration file.
+
+`[sudo] cp config/config.development.json.sample config/config.development.json`
 
 Perform tests:
 
