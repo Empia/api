@@ -33,7 +33,7 @@ Endpoint specifications exist as Javascript files within a `version` folder as m
 
 ##### Endpoint URL
 
-With the above folder and file hierarchy an endpoint's URL uses the following format: 
+With the above folder and file hierarchy an endpoint's URL uses the following format:
 
 
 `http://api.example.com/{version}/{endpoint name}`
@@ -49,7 +49,7 @@ Endpoint specification files should export functions with lowercase names that c
 
 For example:
 
-```
+```js
 module.exports.get = function (req, res, next) {
 
 }
@@ -69,7 +69,7 @@ Each function receives the following three arguments:
 
 **Example, HTTP 200 response**
 
-```
+```js
 module.exports.get = function (req, res, next) {
 
   var data = {
@@ -80,7 +80,7 @@ module.exports.get = function (req, res, next) {
       }
     ]
   };
-  
+
   res.setHeader('content-type', 'application/json');
   res.statusCode = 200;
   res.end(JSON.stringify(data))
@@ -89,7 +89,7 @@ module.exports.get = function (req, res, next) {
 
 **Example, HTTP 404 response**
 
-```
+```js
 module.exports.get = function (req, res, next) {
 
   var data = {
@@ -100,7 +100,7 @@ module.exports.get = function (req, res, next) {
       }
     ]
   };
-  
+
   res.setHeader('content-type', 'application/json');
   res.statusCode = 200;
   res.end(JSON.stringify(data))
@@ -109,7 +109,7 @@ module.exports.get = function (req, res, next) {
 
 **Example, HTTP 500 response**
 
-```
+```js
 module.exports.get = function (req, res, next) {
 
   var data = {
@@ -120,7 +120,7 @@ module.exports.get = function (req, res, next) {
       }
     ]
   };
-  
+
   res.setHeader('content-type', 'application/json');
   res.statusCode = 200;
   res.end(JSON.stringify(data))
@@ -133,7 +133,7 @@ It is possible to override the default endpoint route by including a `config` fu
 
 The following example returns a config object with a route that specifies an optional request parameter, `id`.
 
-```
+```js
 module.exports.config = function () {
   return { "route": "/1.0/books/:id([a-fA-F0-9]{24})?" }
 }
@@ -155,7 +155,7 @@ http://api.example.com/1.0/books?id=55bb8f688d76f74b1303a137
 
 Authentication can be bypassed for your custom endpoint by adding the following to your endpoint file:
 
-```
+```js
 module.exports.model = {}
 module.exports.model.settings = { authenticate : false }
 ```
@@ -166,10 +166,10 @@ module.exports.model.settings = { authenticate : false }
 This will return a "Hello World" example -
 
 ```
-    GET /v1/test-endpoint HTTP/1.1
-    Host: api.example.com
-    content-type: application/json
-    Authorization: Bearer 171c8c12-6e9b-47a8-be29-0524070b0c65
+GET /v1/test-endpoint HTTP/1.1
+Host: api.example.com
+content-type: application/json
+Authorization: Bearer 171c8c12-6e9b-47a8-be29-0524070b0c65
 ```
 
 #### Endpoint GET response
