@@ -66,4 +66,4 @@ You can then interact with Serama as a service using the following command:
 
 ### Additional reading
 
-You can see a complete installation guide for API under Ubuntu [here](https://github.com/dadi/api/blob/master/docs/install.ubuntu.md).
+You can see a complete installation guide for API under Ubuntu [here](https://github.com/dadi/api/blob/api/blob/docs/docs/installGuide.ubuntu.md).
