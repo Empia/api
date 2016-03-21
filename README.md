@@ -23,7 +23,6 @@ It is part of DADI, a suite of components covering the full development stack, b
 * Setup, installation and use
 	* [Setup and installation](https://github.com/dadi/api/blob/docs/docs/setupAndInstallation.md)
 	* [Configuration](https://github.com/dadi/api/blob/docs/docs/configuration.md)
-	* [Configuration notes](https://github.com/dadi/api/blob/docs/docs/configurationNotes.md)
 	* [Complete guide: Ubuntu](https://github.com/dadi/api/blob/docs/docs/installGuide.ubuntu.md)
 * The API
 	* [REST API Specification](https://github.com/dadi/api/blob/docs/docs/restApiSpecification.md)
