@@ -16,17 +16,29 @@ Benchmarks undertaken with ApacheBenchmark (ab) can be seen below.
 
 Inside config.{ENVIRONMENT}.json
 
-    "caching": {
-        "enabled": false,
-        "ttl": 300,
-        "directory": "./cache/api/",
-        "extension": "json"
+```json
+  "caching": {
+    "ttl": 300,
+    "directory": {
+      "enabled": true,
+      "path": "./cache/api",
+      "extension": "json"
+    },
+    "redis": {
+      "enabled": false,
+      "host": "127.0.0.1",
+      "port": 6379
     }
+  }
+```
 
-* `enabled` if app should use caching (defaults to false)
-* `ttl` how long in seconds a cached file should be considered valid (required if cache is enabled)
-* `directory` path to the directory where files should be stored. **Important:** this dir must already exist! (required if cache is enabled)
-* `extension` the file extension to use when naming the cache files. This has no bearing on the `content-type` of the response, so feel free to put anything here (required if cache is enabled)
+* `ttl` how long in seconds a cached file should be considered valid
+* `directory.enabled` if `true`, cache files will be saved to the filesystem
+* `directory.path` relative path to the directory where cache files should be stored. Created if it doesn't exist
+* `directory.extension` the file extension to use when naming the cache files. This has no bearing on the `content-type` of the response, so feel free to put anything here
+* `redis.enabled` if `true`, cache data will be saved to the specified Redis server
+* `redis.host` the Redis server host
+* `redis.port` the port for the Redis server
 
 #### Notes
 
@@ -112,4 +124,4 @@ The naming convention for files is based on a hex string from a sha1 hash of nod
 
 ### Redis
 
-**_To be added icne Redis support is available_**
+**_To be added once Redis support is available_**
