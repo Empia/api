@@ -339,18 +339,25 @@ Given a successful DELETE request, the `feedback` setting determines the respons
 
 #### environment
 
-| Property Name        | Environment Variable |
-|----------------------|----------------------|
-| `accessLog.enabled`  | API_ACCESSLOG_ENABLED|
-| `app.name`           | API_APP_NAME         |
-| `caching.ttl`        | API_CACHING_TTL      |
-| `cluster`            | API_CLUSTER          |
-| `cors`               | API_CORS             |
-| `logging.enabled`    | API_LOGGING_ENABLED  |
-| `server.host`        | API_HOST             |
-| `server.name`        | API_NAME             |
-| `server.port'        | API_PORT             |
-| `status.enabled`     | API_STATUS_ENABLED   |
+| Property Name               | Environment Variable |
+|-----------------------------|----------------------|
+| `accessLog.enabled`         | API_ACCESSLOG_ENABLED|
+| `app.name`                  | API_APP_NAME         |
+| `caching.redis.enabled`     | API_REDIS_ENABLED    |
+| `caching.redis.host`        | REDIS_HOST           |
+| `caching.redis.password`    | REDIS_PASSWORD       |
+| `caching.redis.port`        | REDIS_PORT           |
+| `caching.ttl`               | API_CACHING_TTL      |
+| `cluster`                   | API_CLUSTER          |
+| `cors`                      | API_CORS             |
+| `logging.enabled`           | API_LOGGING_ENABLED  |
+| `logging.filename`          | API_LOG_FILENAME     |
+| `logging.kinesisstream`     | API_KINESISSTREAM    |
+| `logging.path`              | API_LOG_PATH         |
+| `server.host`               | API_HOST             |
+| `server.name`               | API_NAME             |
+| `server.port'               | API_PORT             |
+| `status.enabled`            | API_STATUS_ENABLED   |
 
 
 #### apidoc
