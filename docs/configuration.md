@@ -356,7 +356,7 @@ Given a successful DELETE request, the `feedback` setting determines the respons
 | `logging.path`              | API_LOG_PATH         |
 | `server.host`               | API_HOST             |
 | `server.name`               | API_NAME             |
-| `server.port'               | API_PORT             |
+| `server.port`               | API_PORT             |
 | `status.enabled`            | API_STATUS_ENABLED   |
 
 
