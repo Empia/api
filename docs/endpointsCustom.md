@@ -156,8 +156,23 @@ http://api.example.com/1.0/books?id=55bb8f688d76f74b1303a137
 Authentication can be bypassed for your custom endpoint by adding the following to your endpoint file:
 
 ```js
-module.exports.model = {}
-module.exports.model.settings = { authenticate : false }
+module.exports.model = {
+  settings: {
+    authenticate : false
+  }
+}
+```
+
+#### Caching
+
+Caching of custom endpoints is disabled by default. Configure it to cache responses using the following block in your endpoint file:
+
+```js
+module.exports.model = {
+  settings: {
+    cache : true
+  }
+}
 ```
 
 
