@@ -12,12 +12,14 @@ This guide assumes a single server holding both the database and the API.
 
 #### Node.js latest
 
+Install Node 4 (do not install higher versions - they are not supported)
+
 1. `sudo apt-get -y update`
 2. `sudo apt-get -y upgrade`
-3. `sudo apt-get -y install python-software-properties`
-4. `sudo add-apt-repository ppa:chris-lea/node.js`
-5. `sudo apt-get -y update`
-6. `sudo apt-get -y install nodejs`
+3. `sudo apt-get -y install gcc make build-essential python-software-properties` 
+4. `sudo curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -`
+5. `sudo apt-get -y install nodejs`
+6. `sudo npm install npm -g`
 
 #### MongoDB
 
