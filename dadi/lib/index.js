@@ -229,6 +229,7 @@ Server.prototype.loadPaths = function (paths, done) {
   options.collectionPath = path.resolve(paths.collections || path.join(__dirname, '/../../workspace/collections'))
   options.endpointPath = path.resolve(paths.endpoints || path.join(__dirname, '/../../workspace/endpoints'))
   options.hookPath = path.resolve(paths.hooks || path.join(__dirname, '/../../workspace/hooks'))
+  options.analyserPath = path.resolve(paths.analysers || path.join(__dirname, '/../../workspace/analysers'))
 
   var idx = 0
 
@@ -254,6 +255,12 @@ Server.prototype.loadApi = function (options) {
   var collectionPath = this.collectionPath = options.collectionPath || path.join(__dirname, '/../../workspace/collections')
   var endpointPath = this.endpointPath = options.endpointPath || path.join(__dirname, '/../../workspace/endpoints')
   var hookPath = this.hookPath = options.hookPath || path.join(__dirname, '/../../workspace/hooks')
+  var analyserPath = this.analyserPath = options.analyserPath || path.join(__dirname, '/../../workspace/analysers')
+
+  self.updateAnalysers(analyserPath)
+  self.addMonitor(analyserPath, function (analyser) {
+    self.updateAnalysers(analyserPath)
+  })
 
   self.updateHooks(hookPath)
   self.addMonitor(hookPath, function (hook) {
@@ -794,6 +801,57 @@ Server.prototype.addEndpointResource = function (options) {
   })
 
   log.info({module: 'server'}, 'Endpoint loaded: ' + name)
+}
+
+Server.prototype.updateAnalysers = function (analyserPath) {
+  var analysers = fs.readdirSync(analyserPath)
+
+  analysers.forEach((analyser) => {
+    this.addAnalyser({
+      analyser: analyser,
+      filepath: path.join(analyserPath, analyser)
+    })
+  })
+}
+
+Server.prototype.addAnalyser = function (options) {
+  if (path.extname(options.filepath) !== '.js') return
+  var analyser = options.analyser
+
+  var name = analyser.replace('.js', '')
+  var filepath = options.filepath
+  delete require.cache[filepath]
+
+  try {
+    var content = fs.readFileSync(filepath).toString()
+
+    var opts = {
+      route: 'analyser:' + name,
+      component: filepath,
+      docs: parsecomments(content),
+      filepath: filepath
+    }
+
+    this.addComponent(opts)
+  } catch (e) {
+    console.log(e)
+  }
+
+  this.addMonitor(filepath, (filename) => {
+    delete require.cache[filepath]
+
+    try {
+      opts.component = require(filepath)
+    } catch (e) {
+      // if file was removed "un-use" this component
+      if (e && e.code === 'ENOENT') {
+        this.removeMonitor(filepath)
+        this.removeComponent(opts.route)
+      }
+    }
+  })
+
+  log.info({module: 'server'}, 'Analyser loaded: ' + name)
 }
 
 Server.prototype.updateHooks = function (hookPath) {

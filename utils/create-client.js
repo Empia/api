@@ -1,9 +1,16 @@
 #! /usr/bin/env node
 
 'use strict'
+let Api
 
-const Connection = require('@dadi/api').Connection
-const config = require('@dadi/api').Config
+try {
+    Api = require('@dadi/api')
+} catch (ex) {
+    Api = require(__dirname + '/../main')
+}
+
+const Connection = Api.Connection
+const config = Api.Config
 
 const connection = Connection(config.get('auth.database'))
 const clientCollectionName = config.get('auth.clientCollection')

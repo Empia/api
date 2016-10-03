@@ -7,9 +7,10 @@ var path = require('path')
 var connection = require(path.join(__dirname, '/connection'))
 var Validator = require(path.join(__dirname, '/validator'))
 var History = require(path.join(__dirname, '/history'))
-var Composer = require(path.join(__dirname, '/../composer')).Composer
 var Hook = require(path.join(__dirname, '/hook'))
+var Composer = require(path.join(__dirname, '/../composer')).Composer
 var queryUtils = require(path.join(__dirname, '/utils'))
+var Search = require(path.join(__dirname, '/search'))
 
 // track all models that have been instantiated by this process
 var _models = {}
@@ -53,11 +54,21 @@ var Model = function (name, schema, conn, settings, database) {
   // setup history context unless requested not to
   this.storeRevisions = (this.settings.storeRevisions !== false)
 
+  // setup search context if requested
+  this.storeSearch = this.settings.storeSearch || false
+
+
   if (this.storeRevisions) {
     this.history = new History(this)
     // attach revision collection for this model.
     // if no value is specified, use 'History' suffix by default
     this.revisionCollection = (this.settings.revisionCollection ? this.settings.revisionCollection : this.name + 'History')
+  }
+  if (this.storeSearch) {
+    this.search = new Search(this)
+    // attach search collection for this model.
+    // if no value is specified, use 'Search' suffix by default
+    this.searchCollection = (this.settings.searchCollection ? this.settings.searchCollection : this.name + 'Search')
   }
 
 /*
@@ -236,6 +247,10 @@ Model.prototype.create = function (obj, internals, done, req) {
   var saveDocuments = (database) => {
     database.collection(this.name).insert(obj, (err, doc) => {
       if (err) return done(err)
+
+      if (this.search) {
+        this.search.index(doc)
+      }
 
       var results = {
         results: doc
@@ -842,7 +857,9 @@ Model.prototype.update = function (query, update, internals, done, req) {
 
               // apply any existing `afterUpdate` hooks
               triggerAfterUpdateHook(docs)
-
+              if (this.search) {
+                this.search.index(docs)
+              }
               done(null, results)
             })
           } else {
@@ -860,7 +877,9 @@ Model.prototype.update = function (query, update, internals, done, req) {
 
               // apply any existing `afterUpdate` hooks
               triggerAfterUpdateHook(doc)
-
+              if (this.search) {
+                this.search.index(doc)
+              }
               done(null, results)
             })
           }
