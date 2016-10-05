@@ -93,31 +93,42 @@ const fs = require('fs')
 
 const config = require(path.join(__dirname, '/../../../config'))
 
-const SearchController = function() {
+const SearchController = function (model) {
+  this.model = model
   this.analysers = this.loadAll()
   return this
 }
 
-SearchController.prototype.findAnalyser = function(type, name) {
+SearchController.prototype.findAnalyser = function (type, name) {
   return _.find(this.analysers, (analyser) => {
-    return _.contains(analyser.types, type) && name ? (analyser.name === name) : true
+    return (analyser.type === type && analyser.default) && (name ? (analyser.name === name) : true)
   })
 }
 
-SearchController.prototype.analyseFields = function(doc, documentId, model) {
+SearchController.prototype.analyseFields = function (doc, documentId, model) {
   _.each(doc, (field) => {
-    field.analyser.parse(field, documentId, model)
+    field.analyser.parse(field, documentId).then((entries) => {
+      _.each(entries, (entry) => {
+        entry.documentId = documentId
+        entry.analyser = field.analyser.name
+      })
+      model.connection.db.collection(model.searchCollection).insert(entries, function (err, doc) {
+        if (err) return err
+        console.log('Search entries', doc)
+      })
+      // this.save(entries)
+    })
   })
 }
 
-SearchController.prototype.loadAll = function() {
+SearchController.prototype.loadAll = function () {
   var files = fs.readdirSync(config.get('paths.analysers'))
   return _.map(files, (file) => {
     return require(path.resolve(config.get('paths.analysers'), file))
   })
 }
 
-module.exports = function() {
+module.exports = function () {
   return new SearchController()
 }
 

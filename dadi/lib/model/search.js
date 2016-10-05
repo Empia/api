@@ -3,27 +3,27 @@ const _ = require('underscore')
 const path = require('path')
 const SearchController = require(path.join(__dirname, '/../search'))
 
-const Search = function(model) {
+const Search = function (model) {
   this.searchController = new SearchController()
-
   this.model = model
 
   this.applyFieldNames()
-  this.acceptedFields = this.reduceToValid(this.model.schema)
+  this.acceptedFields = this.reduceToValid(model.schema)
 }
 
-Search.prototype.index = function(docs) {
+Search.prototype.index = function (docs, model) {
+  this.model = model
   this.docs = _.isArray(docs) ? docs : [docs]
-  this.analyseDocuments()
+  this.analyseDocuments(model)
 }
 
-Search.prototype.analyseDocuments = function() {
+Search.prototype.analyseDocuments = function () {
   _.each(this.docs, (doc) => {
     this.searchController.analyseFields(this.getValidFields(doc), doc._id, this.model)
   })
 }
 
-Search.prototype.getValidFields = function(doc) {
+Search.prototype.getValidFields = function (doc) {
   return _.filter(_.map(this.acceptedFields, (field) => {
     field.value = (doc[field.fieldName] && !_.isUndefined(doc[field.fieldName])) ? doc[field.fieldName] : null
     return field
@@ -32,20 +32,20 @@ Search.prototype.getValidFields = function(doc) {
   })
 }
 
-Search.prototype.reduceToValid = function(schema) {
+Search.prototype.reduceToValid = function (schema) {
   return _.filter(_.map(
     _.filter(schema, (field, key) => {
       return field.search && field.search.indexed
-    }), 
+    }),
     (field) => {
       field.analyser = this.searchController.findAnalyser(field.type, field.search.analyser || null)
       return field
     }), (field) => {
-      return !_.isUndefined(field.analyser)
+    return !_.isUndefined(field.analyser)
   })
 }
 
-Search.prototype.applyFieldNames = function() {
+Search.prototype.applyFieldNames = function () {
   _.each(this.model.schema, (field, key) => {
     field.fieldName = key
   })

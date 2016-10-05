@@ -57,7 +57,6 @@ var Model = function (name, schema, conn, settings, database) {
   // setup search context if requested
   this.storeSearch = this.settings.storeSearch || false
 
-
   if (this.storeRevisions) {
     this.history = new History(this)
     // attach revision collection for this model.
@@ -249,7 +248,7 @@ Model.prototype.create = function (obj, internals, done, req) {
       if (err) return done(err)
 
       if (this.search) {
-        this.search.index(doc)
+        this.search.index(doc, this)
       }
 
       var results = {
@@ -858,7 +857,7 @@ Model.prototype.update = function (query, update, internals, done, req) {
               // apply any existing `afterUpdate` hooks
               triggerAfterUpdateHook(docs)
               if (this.search) {
-                this.search.index(docs)
+                this.search.index(docs, this)
               }
               done(null, results)
             })
@@ -878,7 +877,7 @@ Model.prototype.update = function (query, update, internals, done, req) {
               // apply any existing `afterUpdate` hooks
               triggerAfterUpdateHook(doc)
               if (this.search) {
-                this.search.index(doc)
+                this.search.index(doc, this)
               }
               done(null, results)
             })
