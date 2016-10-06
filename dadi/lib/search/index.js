@@ -1,8 +1,8 @@
-// var _ = require('underscore')
-// var path = require('path')
-// var url = require('url')
-// var help = require(path.join(__dirname, '/../help'))
-// var model = require(path.join(__dirname, '/../model'))
+// let _ = require('underscore')
+// let path = require('path')
+// let url = require('url')
+// let help = require(path.join(__dirname, '/../help'))
+// let model = require(path.join(__dirname, '/../model'))
 // /*
 
 // Search middleware allowing cross-collection querying
@@ -19,13 +19,13 @@
 // module.exports = function (server) {
 //   server.app.use('/:version/search', function (req, res, next) {
 //     // sorry, we only process GET requests at this endpoint
-//     var method = req.method && req.method.toLowerCase()
+//     let method = req.method && req.method.toLowerCase()
 //     if (method !== 'get') {
 //       return next()
 //     }
 
-//     var path = url.parse(req.url, true)
-//     var options = path.query
+//     let path = url.parse(req.url, true)
+//     let options = path.query
 
 //     // no collection and no query params
 //     if (!(options.collections && options.query)) {
@@ -33,27 +33,27 @@
 //     }
 
 //     // split the collections param
-//     var collections = options.collections.split(',')
+//     let collections = options.collections.split(',')
 
 //     // extract the query from the querystring
-//     var query = help.parseQuery(options.query)
+//     let query = help.parseQuery(options.query)
 
 //     // determine API version
-//     var apiVersion = path.pathname.split('/')[1]
+//     let apiVersion = path.pathname.split('/')[1]
 
 //     // no collections specfied
 //     if (collections.length === 0) {
 //       return help.sendBackJSON(400, res, next)(null, {'error': 'Bad Request'})
 //     }
 
-//     var results = {}
-//     var idx = 0
+//     let results = {}
+//     let idx = 0
 
 //     _.each(collections, function (collection) {
 //       // get the database and collection name from the
 //       // collection parameter
-//       var parts = collection.split('/')
-//       var database, name, mod
+//       let parts = collection.split('/')
+//       let database, name, mod
 
 //       query.apiVersion = apiVersion
 
@@ -86,50 +86,87 @@
 //   })
 // }
 
+/*
+
+@example 1
+
+//Contains a word like lorem
+{
+  "where": {
+    "like": "lorem"
+  }
+}
+
+{
+  "where": {
+    "contains": "lorem"
+  }
+}
+
+{
+  "where": {
+    "is": "lorem"
+  }
+}
+
+{
+  "where": {
+    "fields": ["title"],
+    "like": "lorem"
+  }
+}
+
+*/
+
 'use strict'
-const _ = require('underscore')
 const path = require('path')
-const fs = require('fs')
+const model = require(path.join(__dirname, '/../model'))
+const help = require(path.join(__dirname, '/../help'))
 
-const config = require(path.join(__dirname, '/../../../config'))
+const Search = require(path.join(__dirname, '/../model/search'))
 
-const SearchController = function (model) {
-  this.model = model
-  this.analysers = this.loadAll()
+const SearchController = function (server) {
+  if (!server) return
+  this.server = server
+  this.addRoutes()
   return this
 }
 
-SearchController.prototype.findAnalyser = function (type, name) {
-  return _.find(this.analysers, (analyser) => {
-    return (analyser.type === type && analyser.default) && (name ? (analyser.name === name) : true)
-  })
-}
-
-SearchController.prototype.analyseFields = function (doc, documentId, model) {
-  _.each(doc, (field) => {
-    field.analyser.parse(field, documentId).then((entries) => {
-      _.each(entries, (entry) => {
-        entry.documentId = documentId
-        entry.analyser = field.analyser.name
+SearchController.prototype.addRoutes = function () {
+  this.server.app.use('/:version/:database/:collectionName/search', (req, res, next) => {
+    var method = req.method && req.method.toLowerCase()
+    if (method === 'get') {
+      return this.find(req.params).then((resp) => {
+        return help.sendBackJSON(200, res, next)(null, resp)
       })
-      model.connection.db.collection(model.searchCollection).insert(entries, function (err, doc) {
-        if (err) return err
-        console.log('Search entries', doc)
+    } else if (method === 'post') {
+      return this.find(req.params, req.body).then((resp) => {
+        return help.sendBackJSON(200, res, next)(null, resp)
       })
-      // this.save(entries)
-    })
+    }
+    return next()
   })
 }
 
-SearchController.prototype.loadAll = function () {
-  var files = fs.readdirSync(config.get('paths.analysers'))
-  return _.map(files, (file) => {
-    return require(path.resolve(config.get('paths.analysers'), file))
-  })
+SearchController.prototype.getSearchModel = function (params) {
+  this.database = params.database
+  this.name = params.collectionName
+  this.apiVersion = params.version
+  let docModel = model(this.name, null, null, this.database)
+  if (docModel && docModel.storeSearch) {
+    return docModel
+  }
 }
 
-module.exports = function () {
-  return new SearchController()
+SearchController.prototype.find = function (params, body) {
+  var searchModel = this.getSearchModel(params)
+  if (!searchModel) return {err: 'Search not enabled for this collection'}
+  return new Search(searchModel).query(this.apiVersion, body || params.search)
+  // return {}
+}
+
+module.exports = function (server) {
+  return new SearchController(server)
 }
 
 module.exports.SearchController = SearchController

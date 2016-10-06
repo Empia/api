@@ -187,7 +187,7 @@ Server.prototype.start = function (done) {
   cache(self).init()
 
   // search layer
-  search(self)
+  search(this)
 
   // start listening
   var server = this.server = app.listen(config.get('server.port'), config.get('server.host'))
