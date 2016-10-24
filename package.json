@@ -24,7 +24,7 @@
     "function-rate-limit": "^1.0.1",
     "latest-version": "~2.0.0",
     "mkdirp": "^0.5.1",
-    "moment": "2.11.2",
+    "moment": "2.15.2",
     "mongodb": "~1.4.8",
     "node-uuid": "~1.4.1",
     "parse-comments": "0.4.3",
